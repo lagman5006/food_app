@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foods_app/gen/assets.gen.dart';
-import 'package:foods_app/presentation/blocs/onboarding_bloc.dart';
-import 'package:foods_app/presentation/blocs/onboarding_event.dart';
-import 'package:foods_app/presentation/blocs/onboarding_state.dart';
+import 'package:foods_app/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:go_router/go_router.dart';
+
+import '../blocs/onboarding_bloc/onboarding_event.dart';
+import '../blocs/onboarding_bloc/onboarding_state.dart';
 
 class OnboardingPage extends StatelessWidget {
   final PageController _controller = PageController();

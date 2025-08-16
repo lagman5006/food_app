@@ -15,6 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
@@ -38,9 +43,11 @@ class _HomePageState extends State<HomePage> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  /// 🔍 Search
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 5,
+                    ),
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: "Enter your text",
@@ -58,17 +65,14 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     width: double.infinity,
                     height: 140,
-                    child: PageView(
-                      children: [
-                        _buildBanner(),
-                        _buildBanner(),
-                      ],
-                    ),
+                    child: PageView(children: [_buildBanner(), _buildBanner()]),
                   ),
 
-                  /// 🍽️ Today New Arivable
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
                     child: Row(
                       children: [
                         Column(
@@ -115,6 +119,36 @@ class _HomePageState extends State<HomePage> {
                           location: food.location,
                         );
                       },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "Booking New Restaurant",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text("Best of the food list update"),
+                          ],
+                        ),
+                        const Spacer(),
+                        Row(
+                          children: const [
+                            Text("See All"),
+                            Icon(Icons.keyboard_arrow_right_outlined),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
 
@@ -169,7 +203,9 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(12)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -194,17 +230,20 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
                           child: Text(
                             "Book",
                             style: TextStyle(color: Colors.white, fontSize: 18),
                           ),
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
