@@ -2,9 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:developer' as dev;
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 
-import '../../core/injection/injection.dart';
-import '../../domain/entities/user_entitiy.dart';
-import '../../domain/usecases/auth_usecase.dart';
+import '../../../core/injection/injection.dart';
+import '../../../domain/entities/user_entitiy.dart';
+import '../../../domain/usecases/auth_usecase.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 

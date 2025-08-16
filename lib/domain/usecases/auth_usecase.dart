@@ -15,4 +15,11 @@ class AuthUseCase {
 
   Future<UserEntity?> signInWithGoogle() =>
       _authDataSource.signInWithGoogle();
+
+  Future<void> addUser(UserEntity user) => _authDataSource.addUser(user);
+  Future<void> updateUser(UserEntity user) => _authDataSource.updateUser(user);
+  Future<void> deleteUser(String uid) => _authDataSource.deleteUser(uid);
+
+  Future<List<UserEntity>> getAllUser() => _authDataSource.getAllUsers();
+
 }

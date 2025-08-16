@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foods_app/data/models/product_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../domain/entities/user_entitiy.dart';
@@ -10,7 +11,7 @@ import '../models/user_model.dart';
 const String clientId =
     '785258560356-f4b06i1vv02qk35aacr410riqtkhe4st.apps.googleusercontent.com';
 const String serverClientId =
-    'your-web-client-id.apps.googleusercontent.com';
+    '785258560356-3m7hnpmsklh571jtl2nm6a0j6h4nmtl0.apps.googleusercontent.com';
 
 class AuthDataSource {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -49,17 +50,21 @@ class AuthDataSource {
       }
 
       final GoogleSignInAuthentication googleAuth =
-      await account.authentication;
+          await account.authentication;
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential =
-      await _auth.signInWithCredential(credential);
+      final UserCredential userCredential = await _auth.signInWithCredential(
+        credential,
+      );
       final User? user = userCredential.user;
 
       if (user != null) {
-        final userDoc = await _firestore.collection("users").doc(user.uid).get();
+        final userDoc = await _firestore
+            .collection("users")
+            .doc(user.uid)
+            .get();
         if (!userDoc.exists) {
           await _firestore
               .collection("users")
@@ -78,4 +83,51 @@ class AuthDataSource {
       return null;
     }
   }
+
+  Future<List<UserEntity>> getAllUsers() async {
+    try {
+      final querySnapshot = await _firestore.collection("users").get();
+      return querySnapshot.docs
+          .map((doc) => UserModel.fromMap(doc.data()).toEntity())
+          .toList();
+    } catch (e) {
+      dev.log("Error Fetching users: $e");
+      return [];
+    }
+  }
+
+  Future<void> addUser(UserEntity user) async {
+    try {
+      await _firestore
+          .collection("users")
+          .doc(user.uid)
+          .set(UserModel.fromEntity(user).toMap());
+    } catch (e) {
+      dev.log("Error Adding user: $e");
+      rethrow;
+    }
+  }
+
+  Future<void> updateUser(UserEntity user) async {
+    try {
+      await _firestore
+          .collection("users")
+          .doc(user.uid)
+          .update(UserModel.fromEntity(user).toMap());
+    } catch (e) {
+      dev.log("Error Updating user: $e");
+      rethrow;
+    }
+  }
+
+  Future<void> deleteUser(String uid) async {
+    try {
+      await _firestore.collection("users").doc(uid).delete();
+      dev.log("User deleted with UID: $uid");
+    } catch (e) {
+      dev.log("Error deleting user: $e");
+      rethrow;
+    }
+  }
+
 }

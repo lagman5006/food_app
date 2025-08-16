@@ -8,3 +8,5 @@ AuthDataSource getAuthDataSource() => AuthDataSource();
 AuthRepository getAuthRepository() => AuthRepositoryImpl(getAuthDataSource());
 
 AuthUseCase getAuthUseCase() => AuthUseCase();
+
+

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/user_entitiy.dart';
+import '../../../domain/entities/user_entitiy.dart';
+
 
 abstract class AuthState extends Equatable {
   const AuthState();
