@@ -4,7 +4,7 @@ import 'package:foods_app/gen/assets.gen.dart';
 import 'package:foods_app/presentation/blocs/food_bloc/foodBloc.dart';
 import 'package:foods_app/presentation/blocs/food_bloc/food_state.dart';
 
-import '../blocs/food_bloc/food_event.dart'; // ⬅️ entity chaqirdik
+import '../blocs/food_bloc/food_event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold( // ⬅️ Scaffoldni tashqariga oldim
+    return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         actions: [CircleAvatar(child: Assets.images.ellipse4.image())],
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: BlocBuilder<FoodBloc, FoodState>( // ⬅️ endi state bilan ishlaymiz
+      body: BlocBuilder<FoodBloc, FoodState>(
         builder: (context, state) {
           if (state is FoodLoading) {
             return const Center(child: CircularProgressIndicator.adaptive());
@@ -55,7 +55,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  /// 📢 Bannerlar
                   SizedBox(
                     width: double.infinity,
                     height: 140,
@@ -96,16 +95,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  /// 🍛 Food list (Firebase dan keladi)
                   SizedBox(
                     height: 180,
-                    child: ListView.separated( // ⬅️ spacing uchun separated ishlatdik
+                    child: ListView.separated(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       scrollDirection: Axis.horizontal,
                       itemCount: state.foods.length,
                       separatorBuilder: (_, __) => const SizedBox(width: 12),
                       itemBuilder: (context, index) {
-                        final food = state.foods[index]; // ⬅️ Firebasedan kelgan data
+                        final food = state.foods[index];
                         return _buildFoodCard(
                           image: Image.network(
                             food.image,
@@ -120,7 +118,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  /// 🍴 Restaurant booking qismi (sizniki o‘sha-o‘sha qoldi)
                   _buildRestaurantSection(),
                   const SizedBox(height: 10),
                   _buildRestaurantSection(),
@@ -133,7 +130,7 @@ class _HomePageState extends State<HomePage> {
           return const Center(child: Text("Press refresh to load data"));
         },
       ),
-      floatingActionButton: FloatingActionButton( // ⬅️ test uchun qo‘shdim
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.read<FoodBloc>().add(LoadFoods());
         },
@@ -216,7 +213,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-/// 🍔 Food card UI (sizniki o‘sha-o‘sha qoldi)
 Widget _buildFoodCard({
   required Widget image,
   required String title,
