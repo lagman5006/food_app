@@ -182,19 +182,24 @@ class _HomePageState extends State<HomePage> {
                                       const Icon(Icons.location_on, color: Colors.green),
                                       Text(food.location),
                                       const SizedBox(width: 10),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius: BorderRadius.circular(12),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 10,
-                                            vertical: 5,
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.go("/book");
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius: BorderRadius.circular(12),
                                           ),
-                                          child: Text(
-                                            "Book",
-                                            style: TextStyle(color: Colors.white, fontSize: 18),
+                                          child: const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                              vertical: 5,
+                                            ),
+                                            child: Text(
+                                              "Book",
+                                              style: TextStyle(color: Colors.white, fontSize: 18),
+                                            ),
                                           ),
                                         ),
                                       ),

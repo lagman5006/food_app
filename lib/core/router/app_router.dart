@@ -40,7 +40,7 @@ GoRouter createRouter(AuthBloc authBloc, NavigationCubit navigationCubit) {
         },
         routes: [
           GoRoute(path: "/home", builder: (context, state) => const HomePage()),
-          GoRoute(path: "/book", builder: (context, state) => const BookPage()),
+          GoRoute(path: "/book", builder: (context, state) => const BookPage(foods: [],)),
           GoRoute(
             path: "/profile",
             builder: (context, state) => const ProfilePage(),
