@@ -77,7 +77,6 @@ class BookPage extends StatelessWidget {
                     ),
                     trailing: ElevatedButton(
                       onPressed: () {
-                        // Placeholder for "Check" action (e.g., navigate to details)
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Check action triggered')),
                         );

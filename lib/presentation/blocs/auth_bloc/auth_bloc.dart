@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUp>(_onSignUp);
     on<SignOut>(_onSignOut);
     on<SignInWithGoogle>(_onSignInWithGoogle);
-    on<LoggedIn>(_onLoggedIn); // Added missing event handler
+    on<LoggedIn>(_onLoggedIn);
     on<LoggedOut>(_onLoggedOut);
     on<AddUser>(_onAddUser);
     on<UpdateUser>(_onUpdateUser);
