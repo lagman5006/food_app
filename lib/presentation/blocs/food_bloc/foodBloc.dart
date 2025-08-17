@@ -7,8 +7,17 @@ import 'food_event.dart';
 class FoodBloc extends Bloc<FoodEvent, FoodState> {
   final GetFoods getFoods;
 
-  FoodBloc(this.getFoods,) : super(FoodInitial()) {
+  FoodBloc(this.getFoods) : super(FoodInitial()) {
     on<LoadFoods>((event, emit) async {
+      emit(FoodLoading());
+      try {
+        final foods = await getFoods();
+        emit(FoodLoaded(foods));
+      } catch (e) {
+        emit(FoodError("Failed to load foods $e"));
+      }
+    });
+    on<FetchFoods>((event, emit) async {
       emit(FoodLoading());
       try {
         final foods = await getFoods();

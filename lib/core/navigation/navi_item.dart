@@ -1,9 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-enum NaviItem { home, book, profile }
+import 'package:foods_app/core/navigation/navi_item.dart';
 
 class NavigationCubit extends Cubit<NaviItem> {
   NavigationCubit() : super(NaviItem.home);
 
-  void setTab(NaviItem item) => emit(item);
+  void setItem(NaviItem item) => emit(item);
+}
+
+enum NaviItem {
+  home,
+  book,
+  profile,
 }

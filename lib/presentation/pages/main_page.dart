@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foods_app/core/navigation/navi_item.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../core/navigation/navi_item.dart';
 
 class MainPage extends StatelessWidget {
   final Widget child;
@@ -13,12 +12,12 @@ class MainPage extends StatelessWidget {
     return BlocBuilder<NavigationCubit, NaviItem>(
       builder: (context, state) {
         return Scaffold(
-          body: child, // Use the child from ShellRoute
+          body: child,
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _mapNavItemToIndex(state),
+            currentIndex: NaviItem.values.indexOf(state),
             onTap: (index) {
-              final item = _mapIndexToNavItem(index);
-              context.read<NavigationCubit>().setTab(item);
+              final item = NaviItem.values[index];
+              context.read<NavigationCubit>().setItem(item);
 
               switch (item) {
                 case NaviItem.home:
@@ -33,37 +32,22 @@ class MainPage extends StatelessWidget {
               }
             },
             items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-              BottomNavigationBarItem(icon: Icon(Icons.book), label: "Book"),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.book),
+                label: "Book",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: "Profile",
+              ),
             ],
           ),
         );
       },
     );
-  }
-
-  int _mapNavItemToIndex(NaviItem item) {
-    switch (item) {
-      case NaviItem.home:
-        return 0;
-      case NaviItem.book:
-        return 1;
-      case NaviItem.profile:
-        return 2;
-    }
-  }
-
-  NaviItem _mapIndexToNavItem(int index) {
-    switch (index) {
-      case 0:
-        return NaviItem.home;
-      case 1:
-        return NaviItem.book;
-      case 2:
-        return NaviItem.profile;
-      default:
-        return NaviItem.home;
-    }
   }
 }

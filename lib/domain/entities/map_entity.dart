@@ -1,22 +1,17 @@
-import 'package:equatable/equatable.dart';
-
-class Food extends Equatable {
+class MapEntity {
   final String name;
   final String image;
-  final String location;
   final String category;
+  final String location;
   final double? latitude;
   final double? longitude;
 
-  const Food({
+  const MapEntity({
     required this.name,
     required this.image,
-    required this.location,
     required this.category,
+    required this.location,
     this.latitude,
     this.longitude,
   });
-
-  @override
-  List<Object?> get props => [name, image, location, category, latitude, longitude];
 }

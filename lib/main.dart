@@ -9,6 +9,7 @@ import 'package:foods_app/data/repositories/foods_repository_impl.dart';
 import 'package:foods_app/domain/usecases/food_usecase.dart';
 import 'package:foods_app/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:foods_app/presentation/blocs/food_bloc/foodBloc.dart';
+import 'package:foods_app/presentation/blocs/map_bloc/map_bloc.dart';
 
 import 'firebase_options.dart';
 
@@ -22,11 +23,13 @@ void main() async {
   final getFoods = GetFoods(foodRepository);
   final foodBloc = FoodBloc(getFoods);
   final navigationCubit = NavigationCubit();
+  final mapBloc = MapBloc();
   runApp(
     MyApp(
       authBloc: authBloc,
       foodBloc: foodBloc,
       navigationCubit: navigationCubit,
+      mapBloc: mapBloc,
     ),
   );
 }
@@ -35,11 +38,13 @@ class MyApp extends StatelessWidget {
   final NavigationCubit navigationCubit;
   final AuthBloc authBloc;
   final FoodBloc foodBloc;
+  final MapBloc mapBloc;
   const MyApp({
     super.key,
     required this.authBloc,
     required this.foodBloc,
     required this.navigationCubit,
+    required this.mapBloc,
   });
 
   @override
@@ -49,6 +54,7 @@ class MyApp extends StatelessWidget {
         BlocProvider.value(value: authBloc),
         BlocProvider.value(value: foodBloc),
         BlocProvider.value(value: navigationCubit),
+        BlocProvider.value(value: mapBloc),
       ],
       child: MaterialApp.router(
         routerConfig: createRouter(authBloc, navigationCubit),
